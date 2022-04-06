@@ -11,8 +11,8 @@ set matsize 800
 ////// THE MAIN REGS //////
 
 //// MOEX ////
-// version with first shock
-import delimited using "data/final00.csv", clear
+// version with first shock - checked, not used
+// import delimited using "data/final00.csv", clear
 
 // version without first shock
 import delimited using "data/final01.csv", clear
@@ -27,7 +27,7 @@ eststo: reg moex_spread toneev tonepr rate_shock_abs trans
 eststo: reg moex_spread toneev tonepr rate_shock_abs trans trust
 //тоже не пошло
 // eststo: reg moex_spread c.trust##(c.toneev c.tonepr) rate_shock_abs trans
-esttab using "./materials/stata_tables/table1.tex", replace noconstant se star(* 0.10 ** 0.05 *** 0.01) mgroups("MOEX Spread", pattern(1 0 0 0 0)) nomti
+esttab using "./materials/stata_tables/table1.tex", replace noconstant se star(* 0.10 ** 0.05 *** 0.01) mgroups("MOEX Spread", pattern(1 0 0 0 0)) nomti coeflabels(toneev "Tone Sentiment_{1}" tonepr "Tone Sentiment_{2}" rate_shock_abs "Rate Change" trans "Transparency" trust "Trust")
 
 esttab using "./output/stata_tables/iv.tex", replace f  nonumbers  	mgroups("Charitable Giving" "WTP: Good" "WTP: Gamble" "Trust game", pattern(1 1 1 1 0)) mtitle("Donation" "WTP" "WTP" "Transfer" "Average return")  	coeflabels(hap "Happiness")  	star(* 0.10 ** 0.05 *** 0.01)  	
 
@@ -62,7 +62,7 @@ eststo: reg rts_spread toneev tonepr rate_shock_abs
 eststo: reg rts_spread toneev tonepr rate_shock_abs trans
 eststo: reg rts_spread toneev tonepr rate_shock_abs trans trust
 
-esttab using "./materials/stata_tables/table11.tex", replace noconstant se star(* 0.10 ** 0.05 *** 0.01) mgroups("RTS Spread", pattern(1 0 0 0 0)) nomti
+esttab using "./materials/stata_tables/table11.tex", replace noconstant se star(* 0.10 ** 0.05 *** 0.01) mgroups("RTS Spread", pattern(1 0 0 0 0)) nomti coeflabels(toneev "Tone Sentiment_{1}" tonepr "Tone Sentiment_{2}" rate_shock_abs "Rate Change" trans "Transparency" trust "Trust")
 
 //// GOLD ////
 import delimited using "data/final21.csv", clear
@@ -74,7 +74,7 @@ eststo: reg gold_spread toneev tonepr rate_shock_abs
 eststo: reg gold_spread toneev tonepr rate_shock_abs trans
 eststo: reg gold_spread toneev tonepr rate_shock_abs trans trust
 
-esttab using "./materials/stata_tables/table21.tex", replace noconstant se star(* 0.10 ** 0.05 *** 0.01) mgroups("Gold Spread", pattern(1 0 0 0 0)) nomti
+esttab using "./materials/stata_tables/table21.tex", replace noconstant se star(* 0.10 ** 0.05 *** 0.01) mgroups("Gold Spread", pattern(1 0 0 0 0)) nomti coeflabels(toneev "Tone Sentiment_{1}" tonepr "Tone Sentiment_{2}" rate_shock_abs "Rate Change" trans "Transparency" trust "Trust")
 
 
 
@@ -85,6 +85,51 @@ eststo: reg toneev tonepr
 eststo: reg toneev tonepr tonepr2
 eststo: reg toneev tonepr tonepr2 tonepr3
 esttab using "./materials/stata_tables/tone_test.tex", replace noconstant se star(* 0.10 ** 0.05 *** 0.01) nomti
+
+
+//////////////////////////////////////
+//// Normalization update (01.04.2022)
+//// rates := rates * 100, tones = tones / std(tones)
+import delimited using "data/final01_normalized.csv", clear
+
+eststo clear
+eststo: reg moex_spread toneev, vce(robust)
+eststo: reg moex_spread tonepr, vce(robust)
+// eststo: reg moex_spread toneev tonepr, vce(robust)
+eststo: reg moex_spread toneev tonepr rate_shock_abs, vce(robust)
+// eststo: reg moex_spread toneev tonepr rate_shock_rel, vce(robust)
+eststo: reg moex_spread toneev tonepr rate_shock_abs trans, vce(robust)
+eststo: reg moex_spread toneev tonepr rate_shock_abs trans trust, vce(robust)
+//тоже не пошло
+// eststo: reg moex_spread c.trust##(c.toneev c.tonepr) rate_shock_abs trans
+esttab using "./materials/stata_tables/table1_normalized.tex", replace noconstant se star(* 0.10 ** 0.05 *** 0.01) mgroups("MOEX Spread", pattern(1 0 0 0 0)) nomti coeflabels(toneev "Tone Sentiment_{1}" tonepr "Tone Sentiment_{2}" rate_shock_abs "Rate Change" trans "Transparency" trust "Trust")
+
+
+
+import delimited using "data/final11_normalized.csv", clear
+
+eststo clear
+eststo: reg rts_spread toneev, vce(robust)
+eststo: reg rts_spread tonepr, vce(robust)
+eststo: reg rts_spread toneev tonepr rate_shock_abs, vce(robust)
+eststo: reg rts_spread toneev tonepr rate_shock_abs trans, vce(robust)
+eststo: reg rts_spread toneev tonepr rate_shock_abs trans trust, vce(robust)
+
+esttab using "./materials/stata_tables/table11_normalized.tex", replace noconstant se star(* 0.10 ** 0.05 *** 0.01) mgroups("RTS Spread", pattern(1 0 0 0 0)) nomti coeflabels(toneev "Tone Sentiment_{1}" tonepr "Tone Sentiment_{2}" rate_shock_abs "Rate Change" trans "Transparency" trust "Trust")
+
+
+
+import delimited using "data/final21_normalized.csv", clear
+
+eststo clear
+eststo: reg gold_spread toneev, vce(robust)
+eststo: reg gold_spread tonepr, vce(robust)
+eststo: reg gold_spread toneev tonepr rate_shock_abs, vce(robust)
+eststo: reg gold_spread toneev tonepr rate_shock_abs trans, vce(robust)
+eststo: reg gold_spread toneev tonepr rate_shock_abs trans trust, vce(robust)
+
+esttab using "./materials/stata_tables/table21_normalized.tex", replace noconstant se star(* 0.10 ** 0.05 *** 0.01) mgroups("Gold Spread", pattern(1 0 0 0 0)) nomti coeflabels(toneev "Tone Sentiment_{1}" tonepr "Tone Sentiment_{2}" rate_shock_abs "Rate Change" trans "Transparency" trust "Trust")
+
 
 
 
