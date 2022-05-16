@@ -1,0 +1,52 @@
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{5}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{MOEX}&\multicolumn{1}{c}{RTSI}&\multicolumn{1}{c}{FXGD\_ETF}&\multicolumn{1}{c}{RUCBITR}&\multicolumn{1}{c}{RUABITR}\\
+\hline
+Tone Sentiment\_{1}&       0.296\sym{**} &       0.272         &       0.154         &      0.0444         &      0.0767         \\
+            &     (0.112)         &     (0.163)         &     (0.451)         &    (0.0275)         &    (0.0544)         \\
+[1em]
+Tone Sentiment\_{2}&      -0.351\sym{**} &      -0.473         &      -0.283         &      -0.161\sym{*}  &      0.0380         \\
+            &     (0.172)         &     (0.282)         &     (0.364)         &    (0.0864)         &    (0.0856)         \\
+[1em]
+Rate Change &      -0.324         &      -0.704         &      -0.298         &      -0.204\sym{***}&      -0.137         \\
+            &     (0.335)         &     (0.519)         &     (0.404)         &    (0.0462)         &     (0.200)         \\
+[1em]
+Transparency&       0.243         &       0.302         &      0.0376         &      0.0909\sym{**} &      0.0810         \\
+            &     (0.175)         &     (0.282)         &     (0.313)         &    (0.0396)         &    (0.0973)         \\
+[1em]
+Trust       &      -1.920         &      -2.217         &      -0.214         &       0.920         &      -1.171         \\
+            &     (3.166)         &     (4.968)         &     (6.968)         &     (0.739)         &     (1.363)         \\
+\hline
+\(N\)       &          40         &          40         &          40         &          40         &          40         \\
+\hline\hline
+\end{tabular}
+}
+{
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{tabular}{l*{5}{c}}
+\hline\hline
+            &\multicolumn{1}{c}{RGBITR}&\multicolumn{1}{c}{RUGBITR1Y}&\multicolumn{1}{c}{RUGBITR3Y}&\multicolumn{1}{c}{RUGBITR5Y}&\multicolumn{1}{c}{RUGBITR10Y}\\
+\hline
+Tone Sentiment\_{1}&      0.0975         &     0.00672         &      0.0582         &      0.0581         &       0.122         \\
+            &    (0.0700)         &   (0.00738)         &    (0.0356)         &    (0.0538)         &     (0.101)         \\
+[1em]
+Tone Sentiment\_{2}&      -0.168         &      0.0308         &     -0.0437         &      0.0914         &      0.0274         \\
+            &     (0.238)         &    (0.0228)         &    (0.0561)         &    (0.0925)         &     (0.148)         \\
+[1em]
+Rate Change &      -0.165         &     0.00243         &      -0.226         &      -0.200         &      -0.101         \\
+            &     (0.108)         &    (0.0384)         &     (0.151)         &     (0.231)         &     (0.308)         \\
+[1em]
+Transparency&       0.129         &    -0.00444         &      0.0778         &       0.112         &      0.0969         \\
+            &     (0.108)         &    (0.0190)         &    (0.0759)         &     (0.115)         &     (0.153)         \\
+[1em]
+Trust       &       0.539         &     -0.0640         &      -0.409         &      -0.548         &      -2.946         \\
+            &     (1.241)         &     (0.322)         &     (0.866)         &     (1.515)         &     (2.400)         \\
+\hline
+\(N\)       &          40         &          40         &          40         &          40         &          40         \\
+\hline\hline
+\multicolumn{6}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{6}{l}{\footnotesize \sym{*} \(p<0.10\), \sym{**} \(p<0.05\), \sym{***} \(p<0.01\)}\\
+\end{tabular}
+}
