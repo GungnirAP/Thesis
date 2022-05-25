@@ -84,8 +84,35 @@ esttab using "./materials/stata_tables/RUABITR_dem_res.csv", replace se star(* 0
 //////////////////////////////////////
 ////// test for autocorrelation //////
 //////////////////////////////////////
-
-tsset id h
-xtserial spread toneev tonepr rate_shock_abs trans trust
 //// nice thing:
 //// predict spread_resid_`i', residuals
+import delimited using "data/dynamics/MOEX_dem.csv", clear
+tsset id h
+xtserial spread toneev tonepr rate_shock_abs trans trust
+import delimited using "data/dynamics/RTSI_dem.csv", clear
+tsset id h
+xtserial spread toneev tonepr rate_shock_abs trans trust
+import delimited using "data/dynamics/FXGDETF_dem.csv", clear
+tsset id h
+xtserial spread toneev tonepr rate_shock_abs trans trust
+import delimited using "data/dynamics/RGBITR_dem.csv", clear
+tsset id h
+xtserial spread toneev tonepr rate_shock_abs trans trust
+import delimited using "data/dynamics/RUGBITR1Y_dem.csv", clear
+tsset id h
+xtserial spread toneev tonepr rate_shock_abs trans trust
+import delimited using "data/dynamics/RUGBITR3Y_dem.csv", clear
+tsset id h
+xtserial spread toneev tonepr rate_shock_abs trans trust
+import delimited using "data/dynamics/RUGBITR5Y_dem.csv", clear
+tsset id h
+xtserial spread toneev tonepr rate_shock_abs trans trust
+import delimited using "data/dynamics/RUGBITR10Y_dem.csv", clear
+tsset id h
+xtserial spread toneev tonepr rate_shock_abs trans trust
+import delimited using "data/dynamics/RUABITR_dem.csv", clear
+tsset id h
+xtserial spread toneev tonepr rate_shock_abs trans trust
+import delimited using "data/dynamics/RUCBITR_dem.csv", clear
+tsset id h
+xtserial spread toneev tonepr rate_shock_abs trans trust
