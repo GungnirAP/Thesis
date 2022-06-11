@@ -1,0 +1,420 @@
+%---- Sample WMSU BSMATH BEAMER template ------
+%---- Begin editing after PREAMBLE END at line 77------
+%---- Created by: Christle Jude L. Maquilan - April 2022 --
+%---- @jmaq03.jm@gmail.com -----
+
+\documentclass[xcolor=dvipsnames,envcountsect]{beamer}
+
+%------------------------------------------------
+%------------------------------------------------
+%------------------------------------------------
+%------------------------------------------------
+%------------------------------------------------
+%----------▼▼▼▼▼ START PREAMBLE ▼▼▼▼▼----------
+
+%-------- theme --------
+\usetheme{Madrid}
+
+%-------- color --------
+\definecolor{crimsonred}{RGB}{52,52,184} % Official RGB code for Crimson Red
+\usecolortheme[named=crimsonred]{structure}
+%-------- set color of 'example block' to crimson theme --------
+\setbeamercolor{block body example}{bg=white}
+\setbeamercolor{block title example}{fg=white, bg=blue!50!black}
+
+%-------- font --------
+\setbeamerfont{structure}{family=\rmfamily,series=\bfseries}
+\usefonttheme[stillsansseriftext]{structurebold}
+\setbeamerfont{section in head/foot}{size=\tiny}
+
+%-------- misc structure --------
+\useoutertheme[footline=authortitle,subsection=false]{miniframes}
+\useinnertheme{rounded}
+\addtobeamertemplate{block begin}{}{\justifying}
+\newtheorem{remark}[theorem]{Remark}
+\renewcommand{\indent}{\hspace*{2em}}
+\setbeamertemplate{theorems}[numbered]
+\setbeamertemplate{caption}[numbered]
+\usepackage[justification=centering]{caption}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+
+%-------- packages to be used -------
+\usepackage{amsmath,amsfonts,amssymb,amscd,amsthm}
+\usepackage{graphicx,xcolor,comment}
+\usepackage{mathrsfs} 
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{hyperref}
+\usepackage{multicol}
+\usepackage{ragged2e}
+\usepackage{caption}
+\usepackage[english]{babel}
+\usepackage{rotating}
+\usepackage{enumerate}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{csquotes}
+
+%-------- for bibliography -----------------
+% \usepackage{biblatex}
+% \setbeamertemplate{bibliography item}{\insertbiblabel}
+% \addbibresource{References.bib}
+% \setbeamertemplate{frametitle continuation}{\frametitle{\color{white}List of References}}
+% ------- MINE
+\usepackage[authoryear,round]{natbib}
+\usepackage{booktabs}
+\usepackage{dcolumn}
+\usepackage[section]{placeins}
+\usepackage{tabularx,colortbl}
+
+%-------- WMSU Backgound -------------------
+\usebackgroundtemplate{%
+% 	\tikz[overlay,remember picture] \node[opacity=0.02, at=(current page.center)] {
+% 		\includegraphics[height=4.5in,width=4.5in]{./Figures/WMSU LOGO.png}};
+}
+
+%----------▲▲▲▲▲ PREAMBLE END ▲▲▲▲▲----------
+%------------------------------------------------
+%------------------------------------------------
+%------------------------------------------------
+%------------------------------------------------
+%------------------------------------------------
+
+%---------START EDITING HERE---------------------
+\title[The Impact of Visual Content in Reviews on Product Returns]{The Impact of Visual Content in Reviews on Product Returns}
+
+\author [Elina Telesheva]{\textbf{Elina Telesheva}}
+
+\institute[Western Mindanao State University] {\emph{Advisor: }\textbf{Daria Dzyabura}\\[1em]
+	NES \& HSE Joint Undergraduate Program\\[1em]
+}
+
+
+\date[May 2022]{\footnotesize May 2022}
+%--------- START DOCUMENT ------------------
+\begin{document}
+\begingroup
+\setbeamertemplate{footline}{}
+\setbeamertemplate{headline}{}
+\begin{frame}{\titlepage}\end{frame}
+\endgroup
+%  CONTENT
+% \begin{frame}{\frametitle{Presentation Outline}\tableofcontents}\end{frame}
+%--------- INTRODUCTION ----------------------
+\section{Introduction}
+\begin{frame}
+	\frametitle{Motivation}
+		\justifying
+		\begin{itemize}
+		    \item Returns for online sales are \textbf{costly} and \textbf{three times more frequent} than in a physical store \citep{wsj}
+		    \item Reviews \textbf{affect customers' behaviour} through
+		    \begin{itemize}
+		        \item trust to a product \citep{cheng_flats}
+		        \item being helpful \citep{sun_helpful, visual_text, fit_context}
+		        \item prompting clients to order online \citep{flavian_pos_reviews}
+		        \item decreasing uncertainty \citep{sahoo_reviews}
+		    \end{itemize}
+		    \item Sellers' photos have different effects on return rates \citep{de_zoom_technologies, hong_visual, dzyabura_image_ml} 
+		\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Research question}
+		\justifying
+		What is the impact of photos and videos in reviews on return rates? 
+		
+		Why is the direction of the effect the way it is?
+\end{frame}
+
+%---------- DATA ---------------------
+\section{Data}
+\begin{frame}
+	\frametitle{Unit-level datasets}
+	\begin{itemize}
+	    \item 1.5M reviews with a timestamp of publishing, the amount of attached photos and videos, and rating
+	    \item Information about the amount of sellers' photos and videos for 323K goods
+	    \item Transaction data with a timestamp, quantity of ordered products and costs
+	\end{itemize}
+    
+\end{frame}
+
+
+\begin{frame}
+		\frametitle{Aggregated datasets}
+	\justifying
+	\begin{itemize}
+	    \item Brand performance from January 1, 2021 till August 31, 2021 with total amount, sales and AIV\footnote{Average Item Value (AIV) equals total Net Sales divided by total amount of items.} of sold and returned items
+	    
+	    \item Performance of clients who have ever bought a product of interest with total amount, sales and AIV of sold and returned items
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+		\frametitle{Summary statistics for generated dataset}
+	\justifying
+	\begingroup
+	\tiny
+	\begin{table}[!htbp] \centering 
+%   \caption{Summary statistics for experience goods} 
+%   \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-2} D{.}{.}{-2} D{.}{.}{-2} D{.}{.}{-2} } 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+Statistic & \multicolumn{1}{c}{Max} & \multicolumn{1}{c}{Mean} & \multicolumn{1}{c}{Min} & \multicolumn{1}{c}{St. Dev.} \\ 
+\hline \\[-1.8ex] 
+\textbf{Experience goods (\# = 1,199,125):} & \multicolumn{4}{l}{}\\
+ReviewPh & 341 & 14.35 & 0 & 39.42 \\ 
+ReviewVid & 4 & 0.02 & 0 & 0.15 \\ 
+ReviewRating & 5.00 & 4.80 & 1.00 & 0.29 \\ 
+ReviewNum & 6,027 & 186.13 & 1 & 635.54 \\ 
+CustAvgRetRate & 1.00 & 0.03 & 0.00 & 0.07 \\ 
+BrandAvgRetRate & 0.35 & 0.05 & 0.00 & 0.03 \\ 
+PhSeller & 17 & 3.86 & 0 & 1.96 \\ 
+Price & 9,736.67 & 413.88 & 0.83 & 309.88 \\ 
+Qty & 11 & 1.03 & 1 & 0.24 \\ 
+BasketSize & 11 & 1.98 & 1 & 1.39 \\ 
+Return & 1 & 0.04 & 0 & 0.21 \\ 
+\hline \\[-1.8ex] 
+\textbf{Search goods (\# = 361,322):} & \multicolumn{4}{l}{}\\
+ReviewPh & 1,281 & 121.02 & 0 & 252.50 \\ 
+ReviewVid & 17 & 0.25 & 0 & 0.99 \\ 
+ReviewRating & 5 & 4.84 & 1 & 0.18 \\ 
+ReviewNum & 5,660 & 508.23 & 1 & 965.25 \\ 
+CustAvgRetRate & 1 & 0.02 & 0 & 0.06 \\ 
+BrandAvgRetRate & 0.23 & 0.02 & 0.01 & 0.01 \\ 
+PhSeller & 21 & 6.93 & 0 & 2.84 \\ 
+Price & 134,983 & 18,378.26 & 1 & 17,676.46 \\ 
+Qty & 16 & 1.02 & 1 & 0.22 \\ 
+BasketSize & 74 & 1.07 & 1 & 0.80 \\ 
+Return & 1 & 0.02 & 0 & 0.13 \\
+\hline
+\hline
+\end{tabular} 
+\end{table}
+
+
+\endgroup
+\end{frame}
+
+%----------- METHODOLOGY ------------------------------
+\section{Methodology}
+\begin{frame}{Hypothesis}
+		\justifying
+		The correlation between the amount of photos and videos in reviews and return probability is negative.
+\end{frame}
+
+\begin{frame}{Model specification}
+		\begin{multline*}
+            Return_{ijt} = \beta_0 + \beta_1ReviewPh_{jt} + \beta_{10}ReviewPh^2_{jt}+ \beta_2 ReviewVid_{jt}+\\+\beta_{11} ReviewVid^2_{jt}+\beta_{3}ReviewRating_{jt}+\beta_{4}ReviewNum_{jt}+\\
+            +\beta_{5}CustAvgRetRate_{i}+\beta_{6}BrandAvgRetRate_{j}+
+            \\+\beta_{7}PhSeller_{j}+\beta_{8}Price_{jt}+\beta_{9}BasketSize_{ijt}+\varepsilon_{ijt}
+        \end{multline*}
+\end{frame}
+
+%---------- RESULTS -----------------------------
+\section{Results}
+\begin{frame}
+	\frametitle{Results}
+	\justifying
+	\tiny
+    \begin{table}[!htbp] \centering 
+  \caption{Results for experience goods} 
+  \label{tab:exp_1} 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-4} D{.}{.}{-4} D{.}{.}{-4} } 
+\\[-1.8ex]\hline 
+\hline 
+\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)}\\ 
+\hline \\[-1.8ex] 
+ ReviewPh & -0.0033^{***} & -0.0009^{**} & -0.0018^{***} \cellcolor[gray]{0.9}\\ 
+  & (0.0002) & (0.0004) & (0.0005) \\ 
+  & & & \\ 
+ ReviewPh2 &  &  & 0.00001^{***} \\ 
+  &  &  & (0.000002) \\ 
+  & & & \\ 
+ ReviewVid & -0.0689^{*} & -0.0687 & 0.1913 \\ 
+  & (0.0372) & (0.0486) & (0.1746) \\ 
+  & & & \\ 
+ ReviewVid2 &  &  & -0.2280^{*} \\ 
+  &  &  & (0.1231) \\ 
+  & & & \\ 
+\hline \\[-1.8ex] 
+Observations & \multicolumn{1}{c}{1,199,125} & \multicolumn{1}{c}{1,199,125} & \multicolumn{1}{c}{1,199,125} \\ 
+Controls & No & Yes & Yes\\
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results}
+	\justifying
+	\tiny
+    \begin{table}[!htbp] \centering 
+  \caption{Results for search goods} 
+  \label{tab:exp_1} 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-4} D{.}{.}{-4} D{.}{.}{-4} } 
+\\[-1.8ex]\hline 
+\hline 
+\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)}\\ 
+\hline \\[-1.8ex] 
+ ReviewPh & -0.0006^{***} & 0.0001 & 0.0001 \\ 
+  & (0.0001) & (0.0003) & (0.0004) \\ 
+  & & & \\ 
+ ReviewPh2 &  &  & 0.000001^{**} \\ 
+  &  &  & (0.000000) \\ 
+  & & & \\ 
+ ReviewVid & 0.0392^{***} & 0.0867^{***} & 0.2899^{***}\cellcolor[gray]{0.9} \\ 
+  & (0.0119) & (0.0124) & (0.0611) \\ 
+  & & & \\ 
+ ReviewVid2 &  &  & -0.0386^{***} \\ 
+  &  &  & (0.0147) \\ 
+\hline \\[-1.8ex] 
+Observations & \multicolumn{1}{c}{361,322} & \multicolumn{1}{c}{361,322} & \multicolumn{1}{c}{361,322} \\ 
+Controls & No & Yes & Yes\\
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{Consistency with previous papers}
+	\justifying
+	\tiny
+    \begin{table}[!htbp] \centering 
+  \caption{Results for experience goods} 
+  \label{tab:exp_1} 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-4} D{.}{.}{-4} D{.}{.}{-4} } 
+\\[-1.8ex]\hline 
+\hline 
+\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)}\\ 
+\hline \\[-1.8ex] 
+ ReviewRating &  & -0.2914^{***} & -0.2908^{***} \cellcolor[gray]{0.9}\\ 
+  &  & (0.0135) & (0.0135) \\ 
+ ReviewNum &  & 0.00004^{*} & 0.00001 \cellcolor[gray]{0.9}\\ 
+  &  & (0.00002) & (0.00002) \\ 
+ CustAvgRetRate &  & 11.6655^{***} & 11.6639^{***} \\ 
+  &  & (0.0523) & (0.0523) \\ 
+ BrandAvgRetRate &  & 9.6271^{***} & 9.5679^{***} \\ 
+  &  & (0.1714) & (0.1721) \\ 
+ PhSeller &  & 0.0045 & 0.0059^{**}\cellcolor[gray]{0.9} \\ 
+  &  & (0.0028) & (0.0028) \\ 
+ Price &  & 0.0003^{***} & 0.0003^{***} \\ 
+  &  & (0.00002) & (0.00002) \\ 
+ BasketSize &  & 0.1054^{***} & 0.1055^{***} \\ 
+  &  & (0.0034) & (0.0034) \\ 
+ Constant & -3.0264^{***} & -3.4186^{***} & -3.4171^{***} \\ 
+  & (0.0047) & (0.0670) & (0.0669) \\ 
+\hline \\[-1.8ex] 
+Observations & \multicolumn{1}{c}{1,199,125} & \multicolumn{1}{c}{1,199,125} & \multicolumn{1}{c}{1,199,125} \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{Consistency with previous papers}
+	\justifying
+	\tiny
+    \begin{table}[!htbp] \centering 
+  \caption{Results for search goods} 
+  \label{tab:search_1} 
+\begin{tabular}{@{\extracolsep{5pt}}lD{.}{.}{-4} D{.}{.}{-4} D{.}{.}{-4} } 
+\\[-1.8ex]\hline 
+\hline 
+\\[-1.8ex] & \multicolumn{1}{c}{(1)} & \multicolumn{1}{c}{(2)} & \multicolumn{1}{c}{(3)}\\ 
+\\[-1.8ex] & \multicolumn{1}{c}{Model 1} & \multicolumn{1}{c}{Model 2} & \multicolumn{1}{c}{Model 3}\\ 
+\hline \\[-1.8ex] 
+ ReviewRating &  & -0.5048^{***} & -0.4876^{***} \cellcolor[gray]{0.9}\\ 
+  &  & (0.0470) & (0.0474) \\ 
+ ReviewNum &  & -0.0002^{**} & -0.0004^{***} \cellcolor[gray]{0.9}\\ 
+  &  & (0.0001) & (0.0001) \\ 
+ CustAvgRetRate &  & 10.0736^{***} & 10.0797^{***} \\ 
+  &  & (0.1215) & (0.1217) \\ 
+ BrandAvgRetRate &  & 15.0971^{***} & 14.9916^{***} \\ 
+  &  & (0.6051) & (0.6064) \\ 
+ PhSeller &  & -0.0136^{**} & -0.0131^{**} \\ 
+  &  & (0.0056) & (0.0056) \\ 
+ Price &  & 0.00001^{***} & 0.00001^{***} \\ 
+  &  & (0.000001) & (0.000001) \\ 
+ BasketSize &  & -0.2297^{***} & -0.2307^{***} \\ 
+  &  & (0.0534) & (0.0535) \\ 
+ Constant & -3.9528^{***} & -2.1127^{***} & -2.1679^{***} \\ 
+  & (0.0138) & (0.2366) & (0.2374) \\ 
+\hline \\[-1.8ex] 
+Observations & \multicolumn{1}{c}{361,322} & \multicolumn{1}{c}{361,322} & \multicolumn{1}{c}{361,322} \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+\end{frame}
+
+\begin{frame}
+	\frametitle{Robustness check}
+	\justifying
+
+    \begin{itemize}
+        \item Remove clients with unusual quantity of ordered
+        items belonging to top and bottom 0.5\% percentiles in order to get rid of outliers
+        \item Remove transaction data before June 2021 to consider time period when videos have been available for at least 1 month
+    \end{itemize}
+\end{frame}
+
+%---------- CONCLUSION -----------------------------
+\section{Conclusion}
+\begin{frame}
+	\frametitle{Conclusion}
+	\justifying
+
+    \begin{itemize}
+        \item One additional \textbf{photo} in reviews is likely to decrease return probability of an experience good by 0.17\%
+        \item One additional \textbf{video} in reviews is likely to increase return probability of a search good by 9\%
+        
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Further Research}
+	\justifying
+    
+    \begin{itemize}
+        \item Detail reviews by
+        \begin{itemize}
+            \item year of publication
+            \item quality of visual content
+            \item similarity of attached photos and videos
+        \end{itemize}
+        \item Consider other types of goods besides clothes, books, TVs and smartphones
+        \item Test the hypothesis for different online retailer
+    \end{itemize}
+\end{frame}
+%----------- REFERENCES  -------------
+%----------- No editing in references section ----------
+%----------- edit only in References.bib ----------
+	\begin{frame}%[allowframebreaks]
+	\tiny
+		\justifying
+		\frametitle{References}
+% 		\printbibliography
+        \bibliographystyle{chicago} 
+        \bibliography{References}
+	\end{frame}
+% %--------- THANK YOU Text --------------------------
+% 	\begin{frame}
+% 		\centering
+% 		\begin{block}
+% 			\scshape
+% 				\begin{center}
+% 					\Huge\emph{Thank You So Much!}
+% 				\end{center}
+% 		\end{block}
+% 	\end{frame}
+%----------------------------------------------------
+\end{document}

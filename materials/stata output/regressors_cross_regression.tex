@@ -1,0 +1,36 @@
+\begin{centering}
+	\renewcommand{\thetable}{A\arabic{table}}
+	\begin{table}[p]
+		\captionsetup{justification=centering}
+		\caption{Test of the functional dependence\\between the dependent variables}\label{tab:test_depvar}
+		\makebox[\textwidth]{
+			\begin{threeparttable}
+				\begin{tabular}{l*{5}{c}}
+					\hline\hline
+					&\multicolumn{1}{c}{Tone Sentiment_{1}}  &\multicolumn{1}{c}{Tone Sentiment_{2}}  &\multicolumn{1}{c}{Rate Change}  &\multicolumn{1}{c}{Transparency}  &\multicolumn{1}{c}{Trust}  \\
+					\hline
+					Tone Sentiment_{1}  &  1  &  0.0881  &  -0.00210  &  -0.00578\sym{***}  &  0.0925\sym{**}  \\
+					&  (.)  &  (0.119)  &  (0.00352)  &  (0.00163)  &  (0.0384)  \\
+					[1em]
+					Tone Sentiment_{2}  &  0.0730  &  1  &  0.000135  &  0.00249  &  -0.00547  \\
+					&  (0.102)  &  (.)  &  (0.00472)  &  (0.00170)  &  (0.0417)  \\
+					[1em]
+					Rate Change  &  -2.349  &  0.183  &  1  &  0.123  &  -4.190\sym{***}  \\
+					&  (4.270)  &  (6.364)  &  (.)  &  (0.0758)  &  (1.415)  \\
+					[1em]
+					Transparency  &  -40.66\sym{***}&  21.10  &  0.772\sym{*}  &  1  &  -16.61\sym{***}  \\
+					&  (10.78)  &  (14.78)  &  (0.452)  &  (.)  &  (1.822)  \\
+					[1em]
+					Trust  &  1.136\sym{**}  &  -0.0811  &  -0.0460\sym{***}  &  -0.0290\sym{***}  &  1  \\
+					&  (0.516)  &  (0.614)  &  (0.0143)  &  (0.00566)  &  (.)  \\
+					\hline\hline
+				\end{tabular}
+				\begin{tablenotes}[flushleft] \footnotesize \textbf{Note.} Robust standard errors are given in parentheses:
+					\\ \sym{*} Statistically significant at the 10 percent level.
+					\\ \sym{**} Statistically significant at the 5 percent level.
+					\\ \sym{***} Statistically significant at the 1 percent level.
+				\end{tablenotes}
+			\end{threeparttable}
+		}
+	\end{table}
+\end{centering}
